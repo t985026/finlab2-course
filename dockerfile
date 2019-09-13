@@ -15,16 +15,14 @@ gcc curl \
 sqlite3
 
 #安裝 ta-lib
-RUN wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
+RUN cd /tmp && wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
 tar xvfz ta-lib-0.4.0-src.tar.gz && \
-rm -rf ta-lib-*.tar.gz && \
 cd ta-lib && \
 ./configure --prefix=/usr &&\
 make && \
 make install && \
 pip install TA-Lib && \
-cd ../ \
-rm -rf ~/ta-lib*
+rm -rf /tmp/ta-lib*
 
 #pip install package
 COPY requirements.txt .
