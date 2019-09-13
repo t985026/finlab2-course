@@ -1,1 +1,0 @@
-# finlab2-course
