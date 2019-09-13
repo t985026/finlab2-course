@@ -1,0 +1,11 @@
+setuptools
+Jinja2==2.10
+pandas
+lxml
+pyquery
+BeautifulSoup4
+pymysql
+tqdm
+twstock
+fake-useragent
+jupyter_contrib_nbextensions

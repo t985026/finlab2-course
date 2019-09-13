@@ -1,0 +1,54 @@
+# project 102
+version: '2'
+networks:
+  fintech:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.26.102.0/24
+        gateway: 172.26.102.254
+services:
+  jupyter:
+    restart: ${restart_mode}
+    image: finlab2:v1.0.7
+    container_name: Finlab2-jupyter
+    command: /bin/bash -c "start-notebook.sh --ip=0.0.0.0"
+    volumes:
+      - D:\Gitlab\notebook\Python:/home/jovyan/work
+      # - D:\notebook\Python:/home/jovyan/work
+      # - /etc/localtime:/etc/localtime:ro
+      - .jupyter:/home/jovyan/.jupyter
+    environment:
+      - NB_UID=1000
+      - NB_GID=1000
+      - TIMEZONE=Taipei
+      - TZ=Asia/Taipei
+      - JUPYTER_ENABLE_LAB=${enable_jupyter_lab} # 使用Jupyter labs方式
+      - GRANT_SUDO=${GRANT_SUDO} # 使用戶可使用sudo指令
+      - RESTARTABLE=${RESTARTABLE} # 使容器不會因Quit而關閉
+    user: root
+    networks:
+      fintech:
+        ipv4_address: ${jupyter_IP}
+    ports:
+      - "10288:8888"
+  # findb:
+  #   restart: ${restart_mode}
+  #   image: mariadb:latest
+  #   container_name: Finlab2-findb
+  #   volumes:
+  #     # - D:\Docker\Fintech\findb\config:/etc/mysql
+  #     - D:\Docker\Fintech\findb\data:/var/lib/mysql
+  #     # - /etc/localtime:/etc/localtime:ro
+  #   environment:
+  #     - NB_UID=1000
+  #     - NB_GID=1000
+  #     - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD}
+  #     - TIMEZONE=Taipei
+  #     - TZ=Asia/Taipei
+  #   command: 'mysqld --innodb-flush-method=fsync'
+  #   networks:
+  #     fintech:
+  #       ipv4_address: ${findb_ip}
+  #   ports:
+  #     - "10206:3306"
