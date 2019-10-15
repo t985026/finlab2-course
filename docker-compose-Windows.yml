@@ -14,10 +14,10 @@ services:
     container_name: Finlab2-jupyter
     command: /bin/bash -c "start-notebook.sh --ip=0.0.0.0"
     volumes:
-      - $PWD/Python:/home/jovyan/work
-      # - $PWD/Fintech/Python:/home/jovyan/work
-      - /etc/localtime:/etc/localtime:ro
-      # - .jupyter:/home/jovyan/.jupyter # jupyter設定檔
+      - $PWD\Python:/home/jovyan/work
+      # - $PWD\Fintech\Python:/home/jovyan/work
+      # - /etc/localtime:/etc/localtime:ro
+      # - .jupyter:/home/jovyan/.jupyter
     environment:
       - NB_UID=1000
       - NB_GID=1000
@@ -36,9 +36,9 @@ services:
   #   restart: ${restart_mode}
   #   image: mariadb:latest
   #   container_name: Finlab2-findb
-  #   # volumes:
-  #   #  - $PWD\Fintech\findb\config:/etc/mysql
-  #   #  - /etc/localtime:/etc/localtime:ro
+  #   volumes:
+      # - $PWD\Fintech\findb\config:/etc/mysql
+      # - /etc/localtime:/etc/localtime:ro
   #   environment:
   #     - NB_UID=1000
   #     - NB_GID=1000
